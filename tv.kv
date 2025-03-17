@@ -1,0 +1,408 @@
+#:import Factory kivy.factory.Factory
+<DesiredPopup@Popup>:
+    id: haja
+    name: 'fma'
+    title: 'result_desired is'
+    auto_dismiss: False
+    background_color: (20/250 ,150/250 ,50/250 ,250/255.0)
+    size_hint: .95, .5
+    final_bomba: final_bomba
+    GridLayout:
+        cols:1
+        BoxLayout:
+            orientation: 'vertical'
+            rows:1
+            Label:
+                id: final_bomba
+                text: str(root.final_bomba)
+                font_size: 20
+            Button:
+                text: 'close'
+                size_hint: .2, .2
+                background_color: 0, 1, 0, 1
+                on_press:
+                    root.dismiss()
+
+<EcolesPopup@Popup>:
+    id: ecoles
+    name: 'ecoles'
+    title: 'possible to '
+    auto_dismiss: False
+    background_color: (20/250 ,150/250 ,50/250 ,250/255.0)
+    name_ecoles: name_ecoles
+    size_hint: .95, .5
+    GridLayout:
+        cols: 1
+        BoxLayout:
+            orientation: 'vertical'
+            rows:1
+            Label:
+                id: name_ecoles
+                text: str(root.name_ecoles)
+                font_size: 20
+                size: self.size
+            Button:
+                text: 'close'
+                size_hint: .2, .2
+                pos_hint: {'x': .01 ,'y': .2}
+                background_color: 0, 1, 0, 1
+                on_press:
+                    root.dismiss() 
+<QuestionPopup@Popup>:
+    id: quiz
+    name: 'q'
+    padding: 60,40
+    auto_dismiss: False
+    size_hint: .7, .4
+    title: 'ecole seupeurieur'
+    GridLayout:
+        cols:1
+        BoxLayout:
+            rows:1
+            Label:
+                id: question1
+                text: '                     you want to show ecole seupeurieur'
+                pos_hint: {'x': .1, 'y': .35}
+            Button:
+                id: accepted
+                text: 'yes'
+                bold:True
+                size: self.size
+                size_hint: .3, .3
+                on_press:
+                    root.dismiss()
+                    app.root.current= 're_input'
+            Button:
+                id: refused
+                text: 'None'
+                bold: True
+                size: self.size
+                size_hint: .3, .3
+                on_press:
+                    root.dismiss()
+<ResultPopup@Popup>:
+    id: final
+    name: 'fin'
+    final: final 
+    auto_dismiss: False
+    size_hint: .6, .4
+    padding: 60,40
+    title: 'your result is '
+    GridLayout:
+        cols:1
+        BoxLayout:
+            rows:1
+            orientation: 'vertical'
+            Label:
+                id: texture
+                height:150
+                text: str(root.final)
+                pos_hint: {'x': .01, 'y': .4}
+                font_size:25
+            Button:
+                id: 'close me'
+                size_hint: .3, .2
+                height: 40
+                text: 'close'
+                on_press:
+                    Factory.QuestionPopup().open()
+                    root.dismiss()
+Test:
+    Doda:
+    Ba3a:
+    calcule:
+    ecoles:
+    cible:
+<Doda>:
+    name: 'first'
+    id: screen1
+    passw: passw
+    GridLayout:
+        cols:1
+        padding: 70,80
+        GridLayout:
+            rows:5          
+            Image:
+                height: 80
+                source: 'Image/bac.png'
+            Label:
+                id: real_text
+                text: root.my_text
+                color: 0, 0, 0, 1
+                text_size: self.size
+            TextInput:
+                id:passw
+                multiline: False
+                size_hint: (0.1, 0.3)
+            Button:
+                background_color: 0, 1, 0.2, 0.9
+                text: 'Login'
+                size_hint: (0.3, 0.3)
+                height: 30
+                disabled: True if passw.text == '' else False
+                on_release:
+                    root.Click()
+                    app.root.current='solo' if real_text.text == 'good name!' else 'first'
+                    root.manager.transition.direction = 'left' 
+                    root.manager.current_screen.hoha()
+                    
+                
+           
+           
+                    
+<Ba3a>:
+    name: 'solo'
+    nassw: nassw
+    id: second
+    GridLayout:
+        cols:1
+        padding: 10,50
+        GridLayout:
+            rows:5
+            Label:
+                id: nassw
+                height: 150
+                text: str(root.nassw)
+                color: 0, 0, 0, 1
+                size_hint: 0.3, 1
+                font_size: 55  
+            Button:
+                background_color: 0, 1, 0.5, 0.9
+                text: 'for calcule your moyene general'
+                size_hint: (0.1, 0.3)
+                on_release:
+                    app.root.current= 'maths'
+                    root.manager.transition.direction = 'up'
+                
+
+            Button:
+                background_color: 0, 1, 0.5, 0.9
+                text: 'for expected your moyene generla'
+                size_hint: (0.1, 0.3)
+                on_press:
+                    app.root.current= 'cible'
+                    root.manager.transition.direction= 'right'
+            Button:
+                background_color: 0, 1, 0.5, 0.9
+                text: 'for ecole supierieur'
+                size_hint: (0.1, 0.3)
+                on_press:
+                    app.root.current='re_input'
+                    root.manager.transition.direction = 'left'
+
+
+            Button:
+                text: 'Go Back'
+                size_hint: 0, .2
+                background_color: 0, 1, 0.5, 0.9
+                on_release:
+                    app.root.current= 'first'
+                    root.manager.transition.direction = 'right'
+
+<calcule>:
+    name: 'maths'
+    regional: regional
+    national: national
+    s2: s2
+    s1: s1
+    GridLayout:
+        cols:1
+        GridLayout:
+            rows: 11
+            Box:
+                orientation: 'vertical'
+                Button:
+                    size_hint: .2, .4
+                    text: 'Go back'
+                    background_color: 0, 1, 0, 1
+                    size: '60dp', '50dp'
+                    pos_hint: {'y': .5}
+                    on_release:
+                        app.root.current= 'solo'
+                        root.manager.transition.direction = 'down' 
+                Label:
+                    id: regio
+                    text: root.reg
+                    color: 0, 0, 0, 1
+                    text_size: self.size
+                TextInput:
+                    id: regional
+                    input_filter: 'float'
+                    multiline: False
+                    size_hint: 1, .6
+                Label:
+                    id: natio
+                    text: root.nat
+                    color: 0, 0, 0, 1
+                    text_size: self.size
+                TextInput:
+                    id: national
+                    input_filter: 'float'
+                    multiline: False
+                    size_hint: 1, .6
+                Label:
+                    id: semstre1
+                    text: root.semestre1
+                    color: 0, 0, 0, 1
+                    text_size: self.size
+                TextInput:
+                    id: s1
+                    input_filter: 'float'
+                    multiline: False
+                    size_hint:1, .6
+                Label:
+                    id: semestre2
+                    text: root.sm2
+                    color: 0, 0, 0, 1
+                    text_size: self.size
+                TextInput:
+                    id: s2
+                    input_filter: 'float'
+                    multiline: False
+                    size_hint: 1, .6
+                Best:
+                    Button:
+                        id: next
+                        background_color: 0, 1, 0, 0.9
+                        text: 'Next'
+                        size_hint: .5, .5 
+                        disabled: True if regional.text == '' else False
+                        on_press:
+                            root.verfie()
+<ecoles>:
+    id: result_input
+    name:'re_input'
+    input: input
+    nationale: nationale
+    regionale: regionale
+    GridLayout:
+        cols:1
+        GridLayout:
+            rows: 11
+            Box:
+                orientation: 'vertical'
+                spacing: 5
+                Button:
+                    size_hint: .2, .2
+                    text: 'Go back'
+                    background_color: 0, 1, 0, 1
+                    size: '40dp', '40dp'
+                    pos_hint: {'y': .5}
+                    on_release:
+                        app.root.current= 'solo'
+                        root.manager.transition.direction = 'right'
+                Label:
+                    id: help
+                    text: 'enter your result in examan regional'
+                    size: self.size
+                    color: 0, 0, 0, 1
+                    text_size: self.size
+                    font_size: 25           
+                TextInput:
+                    id: regionale
+                    multiline: False
+                    input_filter:'float'
+                    size_hint: 1, .25
+                Label:
+                    id: help
+                    text: 'enter your result in examan national'
+                    size: self.size
+                    text_size: self.size
+                    color: 0, 0, 0, 1
+                    font_size: 25
+                TextInput:
+                    id: nationale
+                    multiline: False
+                    input_filter: 'float'
+                    size_hint: 1, .25
+                Box:
+                    Button:
+                        id: have
+                        text: 'next'
+                        size_hint: 1, .2
+                        pos_hint: {'x': .01,'y': .5}
+                        background_color: 0, 1, 0, 1
+                        on_press:
+                            root.ecole()
+<cible>:
+    id: ciblet
+    name: 'cible'
+    result_desired: result_desired
+    bac1: bac1
+    se1: se1
+    se2: se2
+    GridLayout:
+        cols:1
+        BoxLayout:
+            rows:1
+            orientation: 'vertical'
+            spacing: 15
+            padding: 5,12
+            Button:
+                size_hint: .2, .4
+                text: 'Go back'
+                background_color: 0, 1, 0, 1
+                size: '60dp', '50dp'
+                pos_hint: {'y': .5}
+                on_release:
+                    app.root.current= 'solo'
+                    root.manager.transition.direction = 'left'
+            Label:
+                id: gide
+                text:'enter the desired result'
+                text_size: self.size
+                color: 0, 0, 0, 1
+                font_size: 25
+                size: self.size
+            TextInput:
+                id: result_desired
+                multiline: False
+                size_hint: 1, .45
+            Label:
+                id: raja
+                text: 'enter your result in examan regional'
+                size: self.size
+                color: 0, 0, 0, 1
+                text_size: self.size
+                font_size: 25           
+            TextInput:
+                id: bac1
+                multiline: False
+                input_filter:'float'
+                size_hint: 1, .45
+            Label:
+                id: sm1
+                text: 'enter result in semstre1'
+                color: 0, 0, 0, 1
+                text_size: self.size
+                font_size: 25
+            TextInput:
+                id: se1
+                input_filter: 'float'
+                multiline: False
+                size_hint:1, .45
+            Label:
+                id: sm2
+                text: 'enter resutl in semestre2'
+                color: 0, 0, 0, 1
+                text_size: self.size
+                font_size: 25
+            TextInput:
+                id: se2
+                input_filter: 'float'
+                multiline: False
+                size_hint: 1, .45
+            Button:
+                id: Next
+                text: 'Next'
+                background_color: 0, 1, 0, 1
+                pos_hint: {'x':.25, 'y':.5}
+                size_hint: .5, .5
+                disabled: True if result_desired.text == '' else False
+                on_press:
+                    root.bomba()
+            
+            
+
+
+
